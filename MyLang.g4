@@ -29,10 +29,10 @@ statement
     | assignment
     | ifStatement
     | loop
-    | functionCall
     | 'return' expression?
     | 'log' '(' expression ')'
-    | 'await' functionCall
+    | 'await' expression
+    | expression // Allow expression as a statement for cases like myArray.push(6)
     ;
 
 assignment
@@ -50,33 +50,41 @@ loop
     | 'while' '(' expression ')' block
     ;
 
-functionCall
-    : IDENTIFIER '(' argumentList? ')'
+// Expression rules
+expression
+    : literal
+    | IDENTIFIER '(' argumentList? ')' // Function call
+    | expression '.' IDENTIFIER '(' argumentList? ')' // Method call
+    | expression '.' IDENTIFIER // Property access
+    | IDENTIFIER // Variable
+    | '(' expression ')' // Grouped expression
+    | expression binaryOp expression // Binary operation
+    | '-' expression // Unary operation
+    | expression '[' expression ']' // Array access
+    | array
+    | object
+    | IDENTIFIER '++' // Increment
+    | IDENTIFIER '--' // Decrement
+    ;
+
+binaryOp
+    : '+' | '-' | '*' | '/' | '<' | '<=' | '>' | '>=' | '==' | '!='
     ;
 
 argumentList
     : expression (',' expression)*
     ;
 
-// Expression rules
-expression
-    : literal
-    | IDENTIFIER
-    | functionCall
-    | '(' expression ')'
-    | expression binaryOp expression
-    | '-' expression
-    | expression '[' expression ']' // array access
-    | expression '.' IDENTIFIER '(' argumentList? ')' // method call
-    | expression '.' IDENTIFIER // property access
-    | array
-    | object
-    | IDENTIFIER '++'
-    | IDENTIFIER '--'
+array
+    : '[' (expression (',' expression)*)? ']'
     ;
 
-binaryOp
-    : '+' | '-' | '*' | '/' | '<' | '<=' | '>' | '>=' | '==' | '!='
+object
+    : '{' (objectField (',' objectField)*)? '}'
+    ;
+
+objectField
+    : IDENTIFIER ':' expression
     ;
 
 // Lexer rules
@@ -108,18 +116,6 @@ literal
     | STRING_LITERAL
     | 'true'
     | 'false'
-    ;
-
-array
-    : '[' (expression (',' expression)*)? ']'
-    ;
-
-object
-    : '{' (objectField (',' objectField)*)? '}'
-    ;
-
-objectField
-    : IDENTIFIER ':' expression
     ;
 
 WS

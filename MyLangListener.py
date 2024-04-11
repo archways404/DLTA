@@ -98,24 +98,6 @@ class MyLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MyLangParser#functionCall.
-    def enterFunctionCall(self, ctx:MyLangParser.FunctionCallContext):
-        pass
-
-    # Exit a parse tree produced by MyLangParser#functionCall.
-    def exitFunctionCall(self, ctx:MyLangParser.FunctionCallContext):
-        pass
-
-
-    # Enter a parse tree produced by MyLangParser#argumentList.
-    def enterArgumentList(self, ctx:MyLangParser.ArgumentListContext):
-        pass
-
-    # Exit a parse tree produced by MyLangParser#argumentList.
-    def exitArgumentList(self, ctx:MyLangParser.ArgumentListContext):
-        pass
-
-
     # Enter a parse tree produced by MyLangParser#expression.
     def enterExpression(self, ctx:MyLangParser.ExpressionContext):
         pass
@@ -134,21 +116,12 @@ class MyLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by MyLangParser#type.
-    def enterType(self, ctx:MyLangParser.TypeContext):
+    # Enter a parse tree produced by MyLangParser#argumentList.
+    def enterArgumentList(self, ctx:MyLangParser.ArgumentListContext):
         pass
 
-    # Exit a parse tree produced by MyLangParser#type.
-    def exitType(self, ctx:MyLangParser.TypeContext):
-        pass
-
-
-    # Enter a parse tree produced by MyLangParser#literal.
-    def enterLiteral(self, ctx:MyLangParser.LiteralContext):
-        pass
-
-    # Exit a parse tree produced by MyLangParser#literal.
-    def exitLiteral(self, ctx:MyLangParser.LiteralContext):
+    # Exit a parse tree produced by MyLangParser#argumentList.
+    def exitArgumentList(self, ctx:MyLangParser.ArgumentListContext):
         pass
 
 
@@ -176,6 +149,24 @@ class MyLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by MyLangParser#objectField.
     def exitObjectField(self, ctx:MyLangParser.ObjectFieldContext):
+        pass
+
+
+    # Enter a parse tree produced by MyLangParser#type.
+    def enterType(self, ctx:MyLangParser.TypeContext):
+        pass
+
+    # Exit a parse tree produced by MyLangParser#type.
+    def exitType(self, ctx:MyLangParser.TypeContext):
+        pass
+
+
+    # Enter a parse tree produced by MyLangParser#literal.
+    def enterLiteral(self, ctx:MyLangParser.LiteralContext):
+        pass
+
+    # Exit a parse tree produced by MyLangParser#literal.
+    def exitLiteral(self, ctx:MyLangParser.LiteralContext):
         pass
 
 
