@@ -1,0 +1,37 @@
+// Variable Declarations
+const num[int] = 10
+let myString[str] = "Hello"
+
+// Function Declaration
+function greet(name[str]) {
+    log("Hello, " + name)
+    return name
+}
+
+// Using conditionals
+if (num > 5) {
+    log("Number is greater than 5")
+} else {
+    log("Number is 5 or less")
+}
+
+// Loop example
+for (let i[int] = 0; i < 10; i++) {
+    log(i)
+}
+
+// Array usage
+let myArray[int] = [1, 2, 3, 4, 5]
+myArray.push(6)
+log(myArray.size)
+
+// Object manipulation
+let person[obj] = {name: "John", age: 30}
+log(person.name)
+
+// Async function call (assuming async handling is supported)
+async function fetchData(url[str]) {
+    // pseudo code for fetching data
+    return "data from " + url
+}
+await fetchData("http://example.com")

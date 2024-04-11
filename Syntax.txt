@@ -26,7 +26,7 @@ myFunction(Variables, Arguments)
 
 # Save the Function return value
 
-static[int] = myFunction(Variables, Arguments)
+const myVar[int] = myFunction(Variables, Arguments)
 
 
 # Async Function Usage
@@ -35,7 +35,7 @@ await myFunction(Variables, Arguments)
 
 # Async Save the Function return value
 
-static[int] myVariable = await myFunction(Variables, Arguments)
+const myVar[int] = await myFunction(Variables, Arguments)
 
 
 ########################
@@ -44,24 +44,24 @@ static[int] myVariable = await myFunction(Variables, Arguments)
 
 # Variable Declaration
 
-# static -> means that the variable is not going to change
-# dynamic -> means that the variable can change (be overwritten etc)
+# const -> constant variable
+# let -> dynamic variable
 
-# Example of a static variable declaration
-static[int] myVariable = 0
+# Example of a constant variable declaration
+const myVar[int] = 0
 
-# Example of a dynamic variable declaration
-dynamic[int] myVariable = 0
+# Example of a let variable declaration
+let myVar[int] = 0
 
 # Can not be overwritten
-static[int] myVariable = 0
-myVariable = 1
-log(myVariable) # this will print: 0
+const myVar[int] = 0
+myVar = 1
+log(myVar) # this will print: 0
 
 # Can be overwritten
-dynamic[int] myVariable = 0
-myVariable = 1
-log(myVariable) # this will print: 1
+let myVar[int] = 0
+myVar = 1
+log(myVar) # this will print: 1
 
 ########################
 # Types                #
@@ -71,21 +71,21 @@ log(myVariable) # this will print: 1
 
 # int -> integer
 # float -> floating point number
-# string -> string
+# str -> string
 # bool -> boolean
-# any -> any type (usually used for non-static variables)
+# any -> any type (usually used for dynamic variables)
 
-# Example of a static variable declaration
-static[int] myVariable = 0
+# Example of a constant variable declaration
+const myVar[int] = 0
 
 # Example of a dynamic variable declaration
-dynamic[any] myVariable = 0
+let myVar[int] = 0
 
-# Example of a static variable declaration
-static[string] myVariable = "Hello World"
+# Example of a constant variable declaration
+const myVar[str] = "Hello World"
 
-# Example of a static variable declaration
-static[bool] myVariable = true
+# Example of a dynamic variable declaration
+const myVar[bool] = true
 
 
 ########################
@@ -94,13 +94,13 @@ static[bool] myVariable = true
 
 # For Loop
 
-for (static[int] i = 0; i < 10; i++) {
+for (let i[int] = 0; i < 10; i++) {
     log(i)
 }
 
 # While Loop
 
-dynamic[int] i = 0
+let i[int] = 0
 while (i < 10) {
     log(i)
     i++
@@ -140,52 +140,70 @@ if (true) {
 
 # Array Declaration
 
-# static -> means that the array is not going to change
-static[arr] = myArray[10] # this will create an empty array with 10 slots
+# const or let can be used for arrays -> [any] or [int] or [str] or [bool]
 
-# dynamic -> means that the array can change (be overwritten etc)
-dynamic[arr] = myArray # this will create an empty array
+# Example of a constant integer array declaration
+const myArray[int] = [1, 2, 3, 4, 5]
+
+# Example of a dynamic array declaration
+let myArray[any] = [1, 2, 3, 4, 5]
+
+# Example of a string array declaration
+let myArray[str] = [1, 2, 3, 4, 5]
+
+# Example of a mixed array declaration
+let myArray[any] = ["Hello", "World", 1, 2, 3]
+myArray.push(true)
+myArray.push(22.3)
+log(myArray) # this will print: ["Hello", "World", 1, 2, 3, true, 22.3]
+
+# or you can declare an empty array
+let myArray[any] = []
+# and then assign values to it
+myArray = [1, 2, 3, 4, 5]
+# or like this
+myArray[0] = 1
+myArray[1] = 2
+# or like this
+myArray.push(1)
+myArray.push(2)
 
 # Array Usage
 
-# Static Array Usage
-static[arr] = myArray[3]
+# Accessing an Array
 
-myArray.push(1)
-myArray.push(2)
-myArray.push(3)
+const myArray[int] = [1, 2, 3, 4, 5]
 log(myArray[0]) # this will print: 1
-log(myArray[1]) # this will print: 2
-log(myArray[2]) # this will print: 3
 
-# Or you can declare the array like this
-static[arr] = myArray[3]
-myArray[0] = 1
-myArray[1] = 2
-myArray[2] = 3
+# Modifying an Array
 
-log(myArray[0]) # this will print: 1
-log(myArray[1]) # this will print: 2
-log(myArray[2]) # this will print: 3
+let myArray[int] = [1, 2, 3, 4, 5]
+myArray[0] = 10
+log(myArray[0]) # this will print: 10
 
-# Dynamic Array Usage
-dynamic[arr] = myArray
+# Adding to an Array
 
-myArray.push(1)
-myArray.push(2)
-myArray.push(3)
-log(myArray[0]) # this will print: 1
-log(myArray[1]) # this will print: 2
-log(myArray[2]) # this will print: 3
+let myArray[int] = [1, 2, 3, 4, 5]
+myArray.push(6)
+log(myArray[5]) # this will print: 6
 
-# Or you can declare the array like this
-dynamic[arr] = myArray
-myArray[0] = 1
-myArray[1] = 2
-myArray[2] = 3
-log(myArray[0]) # this will print: 1
-log(myArray[1]) # this will print: 2
-log(myArray[2]) # this will print: 3
+# Removing from an Array
+
+let myArray[int] = [1, 2, 3, 4, 5]
+myArray.pop()
+log(myArray[4]) # this will print: 4
+
+# Array Length
+
+let myArray[int] = [1, 2, 3, 4, 5]
+log(myArray.size) # this will print: 5
+
+# Array Iteration
+
+let myArray[int] = [1, 2, 3, 4, 5]
+for (let i[int] = 0; i < myArray.size; i++) {
+    log(myArray[i])
+}
 
 ########################
 # Objects              #
@@ -193,33 +211,16 @@ log(myArray[2]) # this will print: 3
 
 # Object Declaration
 
-# static -> means that the object is not going to change
-static[obj] = myObject {
-    myObject.name = "John"
-    myObject.age = 25
+const myObject[obj] = {
+    name = "John",
+    age = 25
 }
 log(myObject.name) # this will print: John
 
-# dynamic -> means that the object can change (be overwritten etc)
-dynamic[obj] = myObject
-myObject.name = "John"
+let myObject[obj] = {name = "John"}
 myObject.age = 25
 log(myObject.name) # this will print: John
-
-# Object Usage
-
-# Static Object Usage
-static[obj] = myObject {
-    myObject.name = "John"
-    myObject.age = 25
-}
-log(myObject.name) # this will print: John
-
-# Dynamic Object Usage
-dynamic[obj] = myObject
-myObject.name = "John"
-myObject.age = 25
-log(myObject.name) # this will print: John
+log(myObject.age) # this will print: 25
 
 
 
